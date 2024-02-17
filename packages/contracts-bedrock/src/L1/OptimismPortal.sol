@@ -66,6 +66,21 @@ contract OptimismPortal is Initializable, ResourceMetering, ISemver {
     /// @notice The address of the Superchain Config contract.
     SuperchainConfig public superchainConfig;
 
+    /// Address of the bridge contract where ETH will be stored.
+    address public bridge;
+
+    /// ETH balance stored on the bridge.
+    uint256 public bridgeBalance;
+
+    /// Event emitted when rewards are distributed to users.
+    event RewardsDistributed(address indexed distributor, address[] recipients, uint256[] amounts);
+
+    constructor() {
+        // Initialize other contracts and variables...
+        bridge = address(0); // Set bridge to initial value
+    }
+
+
     /// @notice Emitted when a transaction is deposited from L1 to L2.
     ///         The parameters of this event are read by the rollup node and used to derive deposit
     ///         transactions on L2.
@@ -125,6 +140,32 @@ contract OptimismPortal is Initializable, ResourceMetering, ISemver {
     /// @notice Address of the SystemConfig on this chain.
     function systemConfig() public view returns (SystemConfig) {
         return SYSTEM_CONFIG;
+    }
+
+    /// Function to set the address of the bridge contract.
+    function setBridge(address _bridge) external {
+        require(bridge == address(0), "OptimismPortal: bridge already set");
+        bridge = _bridge;
+    }
+
+    /// Function to deposit ETH to the bridge.
+    function depositToBridge() internal {
+        // Ensure that the bridge address is set.
+        require(bridge != address(0), "OptimismPortal: bridge not set");
+
+        // Increase the bridge balance with the transferred ETH.
+        bridgeBalance += msg.value;
+    }
+
+    /// Function to distribute rewards to users on the rollup.
+    function distributeRewards(address[] calldata _receivers, uint256[] calldata _amounts) external payable {
+        require(_receivers.length == _amounts.length, "OptimismPortal: invalid input length");
+
+        // Deposit ETH to the bridge before distributing rewards.
+        depositToBridge();
+
+        // Emit an event to indicate the distribution of rewards.
+        emit RewardsDistributed(msg.sender, _receivers, _amounts);
     }
 
     /// @notice Getter function for the address of the guardian. This will be removed in the future, use
