@@ -47,6 +47,11 @@ type Sequencer struct {
 	nextAction time.Time
 }
 
+type RewardDistributedEvent struct {
+    Recipient common.Address
+    Amount    *big.Int
+}
+
 func NewSequencer(log log.Logger, rollupCfg *rollup.Config, engine derive.EngineControl, attributesBuilder derive.AttributesBuilder, l1OriginSelector L1OriginSelectorIface, metrics SequencerMetrics) *Sequencer {
 	return &Sequencer{
 		log:              log,
@@ -57,7 +62,58 @@ func NewSequencer(log log.Logger, rollupCfg *rollup.Config, engine derive.Engine
 		l1OriginSelector: l1OriginSelector,
 		metrics:          metrics,
 	}
+
 }
+
+// Listen for RewardDistributed events emitted by OptimismPortal.sol
+func (d *Sequencer) ListenForRewardDistributedEvents(ctx context.Context, ethClient *eth.Client) error {
+    // Subscribe to RewardDistributed events emitted by OptimismPortal.sol
+    rewardDistributedCh := make(chan *RewardDistributedEvent)
+    subscription, err := ethClient.SubscribeToRewardDistributedEvents(ctx, rewardDistributedCh)
+    if err != nil {
+        return err
+    }
+    defer subscription.Unsubscribe()
+
+    // Process incoming RewardDistributed events
+    for {
+        select {
+        case event := <-rewardDistributedCh:
+            // Include event data in the block being built
+            d.IncludeRewardDistributedEventInBlock(event)
+        case <-ctx.Done():
+            return nil
+        }
+    }
+}
+
+// AddTransactionToBlock adds a transaction to the block being built
+func (engine *Engine) AddTransactionToBlock(tx *types.Transaction) {
+    engine.pendingTransactions = append(engine.pendingTransactions, tx)
+}
+
+
+// Include RewardDistributed event data in the block being built
+func (d *Sequencer) IncludeRewardDistributedEventInBlock(event *RewardDistributedEvent) {
+    // Create a new transaction with the event data
+    tx := types.NewTransaction(
+        nonce, // Nonce for the transaction
+        event.Recipient, // Recipient address
+        event.Amount, // Amount of reward
+        gasLimit, // Gas limit
+        gasPrice, // Gas price
+        nil, // Data (can be empty)
+    )
+
+    // Add the transaction to the block being built
+    d.engine.AddTransactionToBlock(tx)
+
+    // Log that the RewardDistributed event has been included in the block
+    d.log.Info("RewardDistributed event included in the block", "recipient", event.Recipient, "amount", event.Amount)
+}
+
+
+
 
 // StartBuildingBlock initiates a block building job on top of the given L2 head, safe and finalized blocks, and using the provided l1Origin.
 func (d *Sequencer) StartBuildingBlock(ctx context.Context) error {
