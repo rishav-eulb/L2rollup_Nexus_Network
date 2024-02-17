@@ -23,7 +23,7 @@
    - Experimented with a strategy that proved to be costlier on the mainnet. This involved transferring tokens from L1StandardBridge to L2StandardBridge and implementing a function (intiatingETHtoken()) that iterated n times on a custom function to bridge tokens.
    
 3. **Configuration for Event Capture:**
-   - I wasn't able to determine whether I needed to implement a mechanism to capture events emitted from the Optimism portal.
+   - I wasn't able to determine whether I needed to implement a mechanism to capture events emitted on sequencer.go from the Optimism portal.
 
 ## Video Link
 
