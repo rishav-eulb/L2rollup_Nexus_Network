@@ -20,7 +20,7 @@ The deposit flow depicted in the diagram orchestrates the deposit process within
 
 ---
 
-## Problem Faced and Solutions Implemented
+# Problem Faced and Solutions Implemented
 
 ### Part 1:
 
