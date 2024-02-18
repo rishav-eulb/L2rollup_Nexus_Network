@@ -1,4 +1,4 @@
-![image](https://github.com/rishav-eulb/L2rollup_Nexus_Network/assets/77015951/5ba3b043-9495-4cdc-b7fa-9781a6a6f82f)# Generel Deposit Flow
+# Generel Deposit Flow
 
 ## Overview
 
