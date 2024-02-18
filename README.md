@@ -1,3 +1,9 @@
+## Video Link
+
+Watch the video demonstration [here](https://drive.google.com/drive/folders/1QfUPy319qjBe422QpUHvmg-YCYSJciGp?usp=sharing).
+Transaction Histroy of bridging ETH from L1 chain to Rollup [here](https://sepolia.etherscan.io/address/0xf0fe6b146198ee65ce160a0849b8e516563138b7#internaltx).
+---
+
 # Generel Deposit Flow
 
 ## Overview
@@ -86,6 +92,4 @@ To achieve the task of enabling reward distribution on the Rollup network, the f
 3. **Configuration for Event Capture:**
    - I wasn't able to determine whether I needed to implement a mechanism to capture events emitted on sequencer.go from the Optimism portal.
 
-## Video Link
 
-Watch the video demonstration [here](https://drive.google.com/drive/folders/1QfUPy319qjBe422QpUHvmg-YCYSJciGp?usp=sharing).
