@@ -91,4 +91,3 @@ To achieve the task of enabling reward distribution on the Rollup network, the f
 3. **Configuration for Event Capture:**
    - I wasn't able to determine whether I needed to implement a mechanism to capture events emitted on sequencer.go from the Optimism portal, implement function within L1StandardBridge.sol or OptimisticPortal.sol
 
-
