@@ -1,8 +1,6 @@
-## Video Link
+## Watch the video demonstration [here](https://drive.google.com/drive/folders/1QfUPy319qjBe422QpUHvmg-YCYSJciGp?usp=sharing).
 
-Watch the video demonstration [here](https://drive.google.com/drive/folders/1QfUPy319qjBe422QpUHvmg-YCYSJciGp?usp=sharing).
--
-Transaction Histroy of bridging ETH from L1 chain to Rollup [here](https://sepolia.etherscan.io/address/0xf0fe6b146198ee65ce160a0849b8e516563138b7#internaltx).
+## Transaction Histroy of bridging ETH from L1 chain to Rollup [here](https://sepolia.etherscan.io/address/0xf0fe6b146198ee65ce160a0849b8e516563138b7#internaltx).
 ---
 
 # Generel Deposit Flow
