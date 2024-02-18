@@ -64,7 +64,7 @@ To achieve the task of enabling reward distribution on the Rollup network, the f
 
 ---
 
-# Problem Faced and Solutions Implemented
+# Problem Faced
 
 ### Part 1:
 
