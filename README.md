@@ -1,8 +1,8 @@
-# Generel Deposit Flow
+![image](https://github.com/rishav-eulb/L2rollup_Nexus_Network/assets/77015951/5ba3b043-9495-4cdc-b7fa-9781a6a6f82f)# Generel Deposit Flow
 
 ## Overview
 
-![Deposit Flow Diagram](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.alchemy.com%2Foverviews%2Foptimistic-rollups&psig=AOvVaw1rM4CDHg6hivqZKU7iDXZE&ust=1708303468747000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCLjMpuTUs4QDFQAAAAAdAAAAABAR)
+![Deposit Flow Diagram](https://www.alchemy.com/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F105223%2F1704208402-optimistic-rollup-architecture.png&w=1080&q=75)
 
 The deposit flow depicted in the diagram delineates the intricate contracts and functions orchestrating the deposit process within the system. This README elucidates the key components and their interactions involved in the deposit journey.
 
