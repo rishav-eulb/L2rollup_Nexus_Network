@@ -18,6 +18,8 @@ The deposit flow depicted in the diagram orchestrates the deposit process within
 
 - **L2CrossDomainMessenger**: Receives parsed information from Op-node and calls the relayMessage function, facilitating the transfer of assets to the L2 user via the L2StandardBridge.
 
+---
+
 ## Problem Faced and Solutions Implemented
 
 ### Part 1:
