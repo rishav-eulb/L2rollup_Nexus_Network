@@ -85,9 +85,9 @@ To achieve the task of enabling reward distribution on the Rollup network, the f
 1. **Finding Specific Documentation:**
    - I encountered challenges in locating specific documentation required to complete Part 2. To address this, I utilized OpenAI and Gemini AI to better understand the concepts involved.
    
-2. **Implented Standard Deposit Flow strategy:**
+2. **Experimented Standard Deposit Flow strategy:**
    - Experimented with a strategy that proved to be costlier on the mainnet. This involved following standard Deposit Flow approach of  transferring tokens from L1StandardBridge to L2StandardBridge and implementing a function (intiatingETHtoken()) that iterated n times on a custom function to bridge tokens.
    
-3. **Configuration for Event Capture:**
+3. **Configuration for Custom Deposit Flow:**
    - I wasn't able to determine whether I needed to implement a mechanism to capture events emitted on sequencer.go from the Optimism portal, implement function within L1StandardBridge.sol or OptimisticPortal.sol
 
