@@ -1,6 +1,8 @@
-# Genereal Deposit Flow
+# Generel Deposit Flow
 
 ## Overview
+
+![Deposit Flow Diagram](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.alchemy.com%2Foverviews%2Foptimistic-rollups&psig=AOvVaw1rM4CDHg6hivqZKU7iDXZE&ust=1708303468747000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCLjMpuTUs4QDFQAAAAAdAAAAABAR)
 
 The deposit flow depicted in the diagram delineates the intricate contracts and functions orchestrating the deposit process within the system. This README elucidates the key components and their interactions involved in the deposit journey.
 
