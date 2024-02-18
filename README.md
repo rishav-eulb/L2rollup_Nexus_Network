@@ -16,28 +16,6 @@ The deposit flow depicted in the diagram delineates the intricate contracts and 
 
 - **L2CrossDomainMessenger**: Receives parsed information from Op-node and calls the relayMessage function, facilitating the transfer of assets to the L2 user via the L2StandardBridge.
 
-## How to Use
-
-1. Clone the repository.
-2. Navigate to the designated directory.
-3. Install dependencies.
-4. Follow the implementation guidelines provided in the codebase.
-
-## Contributions
-
-Contributions are welcome! Please refer to the CONTRIBUTING.md guidelines for more details.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-
-
-
-
-
-
-
 ## Problem Faced and Solutions Implemented
 
 ### Part 1:
