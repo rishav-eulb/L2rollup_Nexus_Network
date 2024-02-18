@@ -22,9 +22,9 @@ The deposit flow depicted in the diagram orchestrates the deposit process within
 
 # Custom Deposit Flow
 
-## Overview
+## Overview of Part 2
 
-This project aims to enable users on Ethereum to distribute rewards in the form of ETH to users on a Rollup network. The process involves modifying the bridge contract and the sequencer to facilitate the distribution of rewards from Ethereum to Rollup users.
+This part aims to enable users on Ethereum to distribute rewards in the form of ETH to users on a Rollup network. The process involves modifying the bridge contract and the sequencer to facilitate the distribution of rewards from Ethereum to Rollup users.
 
 ## Approach
 
