@@ -75,7 +75,7 @@ To achieve the task of enabling reward distribution on the Rollup network, the f
    - Initially, I encountered difficulties installing the direnv package. However, I overcame this obstacle by practicing Linux commands and referring to the official documentation on direnv.
    
 3. **Time Efficiency in Deployment:**
-   - Deploying the L1 contracts essential for the chain's functionality required time efficiency. During peak times, the estimated amount of ETH required was notably higher, approximately $10k if executed on the mainnet.
+   - Deploying the L1 contracts essential for the chain's functionality required time efficiency. During peak times, the estimated amount of ETH required for Deployment was notably higher, approximately $10k if executed on the mainnet.
    
 4. **Optimistic Rollup Documentation:**
    - The official documentation of Optimistic Rollup lacked clarity regarding running op-geth, op-node, batchr, proposer concurrently.
