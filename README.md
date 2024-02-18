@@ -20,6 +20,45 @@ The deposit flow depicted in the diagram orchestrates the deposit process within
 
 ---
 
+# Custom Deposit Flow
+
+## Overview
+
+This project aims to enable users on Ethereum to distribute rewards in the form of ETH to users on a Rollup network. The process involves modifying the bridge contract and the sequencer to facilitate the distribution of rewards from Ethereum to Rollup users.
+
+## Approach
+
+To achieve the task of enabling reward distribution on the Rollup network, the following approach was implemented:
+
+1. **Modify OptimisticPortal.sol:**
+    - Added a function to the bridge contract that allows users to specify a list of addresses and corresponding reward amounts to be distributed.
+    - Implemented the functionality to store the ETH rewards on the bridge and emit an event (`RewardDistributed`) upon successful distribution.
+
+2. **Update Sequencer (sequencer.go):**
+    - Implemented a function (`IncludeRewardDistributedEventInBlock`) in the sequencer to catch the `RewardDistributed` event emitted by OptimisticPortal.sol.
+    - Modified the sequencer to include the `RewardDistributed` event in the block during block creation.
+    - Ensured that the inclusion of the event in the block increases the user balances on the Rollup network.
+
+## Functions Developed
+
+### OptimisticPortal.sol
+
+#### distributeRewards(address[] memory recipients, uint256[] memory amounts) external payable
+
+- Allows users to distribute rewards in the form of ETH to specified recipients on the Rollup network.
+- Users provide a list of recipient addresses and corresponding reward amounts.
+- The function stores the ETH rewards on the bridge and emits a `RewardDistributed` event upon successful distribution.
+
+### Sequencer (sequencer.go)
+
+#### IncludeRewardDistributedEventInBlock()
+
+- Catches the `RewardDistributed` event emitted by OptimisticPortal.sol.
+- Includes the event in the block during block creation on the Rollup network.
+- Increases the user balances on the Rollup network based on the rewards distributed.
+
+---
+
 # Problem Faced and Solutions Implemented
 
 ### Part 1:
