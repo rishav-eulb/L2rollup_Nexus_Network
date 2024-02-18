@@ -4,7 +4,7 @@
 
 ![Deposit Flow Diagram](https://www.alchemy.com/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F105223%2F1704208402-optimistic-rollup-architecture.png&w=1080&q=75)
 
-The deposit flow depicted in the diagram delineates the intricate contracts and functions orchestrating the deposit process within the system. This README elucidates the key components and their interactions involved in the deposit journey.
+The deposit flow depicted in the diagram orchestrates the deposit process within the system. This README elucidates the key components and their interactions involved in the deposit journey.
 
 ## Components and Functions
 
