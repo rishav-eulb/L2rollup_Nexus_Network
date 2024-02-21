@@ -100,9 +100,9 @@ contract OptimismPortal is Initializable, ResourceMetering, Semver {
 
     // Event declaration
    event MultipleTransactionDeposited(
-       address[] indexed from,
-       address[] indexed to,
-       uint256[] indexed version,
+       address[] from,
+       address[] to,
+       uint256[] version,
        bytes[] opaqueData
    );
 
