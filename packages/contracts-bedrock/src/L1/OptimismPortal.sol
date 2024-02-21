@@ -440,30 +440,7 @@ contract OptimismPortal is Initializable, ResourceMetering, Semver {
      * @param _data       Data to trigger the recipient with.
      */
 
-// Function to handle multiple deposit transactions
-function multipleDepositTransaction(
-    address[] _to,
-    uint256[] _value,
-    uint64[] _gasLimit,
-    bool[] _isCreation,
-    bytes[] _data
-) public payable {
-    uint n = _to.length;
-    require(
-        _value.length == n && _gasLimit.length == n && _isCreation.length == n && _data.length == n,
-        "OptimismPortal: Length should be equal!"
-    );
-
-    bytes[] memory opaqueData = new bytes[](n);
-
-    for (uint i = 0; i < n; i++) {
-        opaqueData[i] = modifieddepositTransaction(_to[i], _value[i], _gasLimit[i], _isCreation[i], _data[i]);
-    }
-
-    emit MultipleTransactionDeposited(msg.sender, _to, DEPOSIT_VERSION, opaqueData);
-}
-
-// Function to handle individual deposit transaction and internal
+// Helper Function to handle `MulptipleDepositTransaction` function 
 function modifieddepositTransaction(
     address _to,
     uint256 _value,
@@ -513,6 +490,31 @@ function modifieddepositTransaction(
         return opaqueData;   
 }
     
+
+// Function to handle multiple deposit transactions
+function multipleDepositTransaction(
+    address[] _to,
+    uint256[] _value,
+    uint64[] _gasLimit,
+    bool[] _isCreation,
+    bytes[] _data
+
+) public payable {
+    uint n = _to.length;
+    require(
+        _value.length == n && _gasLimit.length == n && _isCreation.length == n && _data.length == n,
+        "OptimismPortal: Length should be equal!"
+    );
+
+    bytes[] memory opaqueData = new bytes[](n);
+
+    for (uint i = 0; i < n; i++) {
+        opaqueData[i] = modifieddepositTransaction(_to[i], _value[i], _gasLimit[i], _isCreation[i], _data[i]);
+    }
+
+    emit MultipleTransactionDeposited(msg.sender, _to, DEPOSIT_VERSION, opaqueData);
+}
+
     function depositTransaction(
         address _to,
         uint256 _value,
