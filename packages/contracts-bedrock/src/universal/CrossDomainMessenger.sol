@@ -169,6 +169,79 @@ abstract contract CrossDomainMessenger is
     constructor(address _otherMessenger) {
         OTHER_MESSENGER = _otherMessenger;
     }
+    function sendMultipleMessage(
+        address[] calldata _target,
+        bytes[] calldata _message,
+        uint[] calldata _value,
+        uint32[] calldata _minGasLimit
+    ) external payable {
+        require(
+            _target.length == _message.length && _message.length == _minGasLimit.length,
+            "Error: size not equal"
+        );
+
+        bytes[] memory data;
+        uint32[] memory baseGasLimit;
+
+        for (uint i = 0; i < _target.length; i++) {
+            (data[i], baseGasLimit[i]) = sendMessages(_target[i], _message[i], _value[i], _minGasLimit[i]);
+        }
+
+        _sendMultipleMessages(
+            OTHER_MESSENGER,
+            baseGasLimit,
+            _value,
+            data
+        );
+    }
+
+    function sendMessages(
+        address _target,
+        bytes calldata _message,
+        uint _value,
+        uint32 _minGasLimit
+    ) external payable returns (bytes memory, uint32) {
+        // Triggers a message to the other messenger. Note that the amount of gas provided to the
+        // message is the amount of gas requested by the user PLUS the base gas value. We want to
+        // guarantee the property that the call to the target contract will always have at least
+        // the minimum gas limit specified by the user.
+        _sendMessages(
+            OTHER_MESSENGER,
+            baseGas(_message, _minGasLimit),
+            msg.value,
+            abi.encodeWithSelector(
+                this.relayMessage.selector,
+                messageNonce(),
+                msg.sender,
+                _target,
+                msg.value,
+                _minGasLimit,
+                _message
+            )
+        );
+
+        emit SentMessage(_target, msg.sender, _message, messageNonce(), _minGasLimit);
+        emit SentMessageExtension1(msg.sender, msg.value);
+
+        unchecked {
+            ++msgNonce;
+        }
+
+        return (
+            abi.encodeWithSelector(
+                this.relayMessage.selector,
+                messageNonce(),
+                msg.sender,
+                _target,
+                msg.value,
+                _minGasLimit,
+                _message
+            ),
+            baseGas(_message, _minGasLimit)
+        );
+    }
+
+
 
     /// @notice Sends a message to some target address on the other chain. Note that if the call
     ///         always reverts, then the message will be unrelayable, and any ETH sent will be
