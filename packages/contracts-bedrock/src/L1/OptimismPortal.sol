@@ -476,9 +476,6 @@ function modifieddepositTransaction(
             from = AddressAliasHelper.applyL1ToL2Alias(msg.sender);
         }
 
-        // Compute the opaque data that will be emitted as part of the TransactionDeposited event.
-        // We use opaque data so that we can update the TransactionDeposited event in the future
-        // without breaking the current interface.
         bytes memory opaqueData = abi.encodePacked(
             msg.value,
             _value,
