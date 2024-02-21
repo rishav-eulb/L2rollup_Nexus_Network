@@ -100,9 +100,9 @@ contract OptimismPortal is Initializable, ResourceMetering, Semver {
 
     // Event declaration
    event MultipleTransactionDeposited(
-       address[] from,
-       address[] to,
-       uint256[] version,
+       address[] indexed from,
+       address[] indexed to,
+       uint256[] indexed version,
        bytes[] opaqueData
    );
 
@@ -442,12 +442,12 @@ contract OptimismPortal is Initializable, ResourceMetering, Semver {
 
 // Function to handle multiple deposit transactions
 function multipleDepositTransaction(
-    address[] memory _to,
-    uint256[] memory _value,
-    uint64[] memory _gasLimit,
-    bool[] memory _isCreation,
-    bytes[] memory _data
-) public {
+    address[] _to,
+    uint256[] _value,
+    uint64[] _gasLimit,
+    bool[] _isCreation,
+    bytes[] _data
+) public payable {
     uint n = _to.length;
     require(
         _value.length == n && _gasLimit.length == n && _isCreation.length == n && _data.length == n,
@@ -471,12 +471,6 @@ function modifieddepositTransaction(
     bool _isCreation,
     bytes memory _data
 ) internal returns (bytes memory) {
-      address _to,
-        uint256 _value,
-        uint64 _gasLimit,
-        bool _isCreation,
-        bytes memory _data
-    ) public payable metered(_gasLimit) {
         // Just to be safe, make sure that people specify address(0) as the target when doing
         // contract creations.
         if (_isCreation) {
