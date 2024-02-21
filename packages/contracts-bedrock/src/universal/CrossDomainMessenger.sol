@@ -169,6 +169,33 @@ abstract contract CrossDomainMessenger is
     constructor(address _otherMessenger) {
         OTHER_MESSENGER = _otherMessenger;
     }
+
+    function sendMessages(
+        address _target,
+        bytes calldata _message,
+        uint _value,
+        uint32 _minGasLimit
+    )  internal returns (bytes memory, uint32) {
+        emit SentMessage(_target, msg.sender, _message, messageNonce(), _minGasLimit);
+        emit SentMessageExtension1(msg.sender, msg.value);
+
+        unchecked {
+            ++msgNonce;
+        }
+
+        return (
+            abi.encodeWithSelector(
+                this.relayMessage.selector,
+                messageNonce(),
+                msg.sender,
+                _target,
+                _minGasLimit,
+                _message
+            ),
+            baseGas(_message, _minGasLimit)
+        );
+    }
+
     function sendMultipleMessage(
         address[] calldata _target,
         bytes[] calldata _message,
@@ -195,32 +222,7 @@ abstract contract CrossDomainMessenger is
         );
     }
 
-    function sendMessages(
-        address _target,
-        bytes calldata _message,
-        uint _value,
-        uint32 _minGasLimit
-    ) external payable returns (bytes memory, uint32) {
-        emit SentMessage(_target, msg.sender, _message, messageNonce(), _minGasLimit);
-        emit SentMessageExtension1(msg.sender, msg.value);
-
-        unchecked {
-            ++msgNonce;
-        }
-
-        return (
-            abi.encodeWithSelector(
-                this.relayMessage.selector,
-                messageNonce(),
-                msg.sender,
-                _target,
-                _minGasLimit,
-                _message
-            ),
-            baseGas(_message, _minGasLimit)
-        );
-    }
-
+    
 
 
     /// @notice Sends a message to some target address on the other chain. Note that if the call
