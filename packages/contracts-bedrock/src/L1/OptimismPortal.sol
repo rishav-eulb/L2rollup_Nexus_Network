@@ -493,7 +493,7 @@ function multipleDepositTransaction(
     address[] _to,
     uint256[] _value,
     uint64[] _gasLimit,
-    bool[] _isCreation,
+    bool _isCreation,
     bytes[] _data
 
 ) public payable {
@@ -506,7 +506,7 @@ function multipleDepositTransaction(
     bytes[] memory opaqueData = new bytes[](n);
 
     for (uint i = 0; i < n; i++) {
-        opaqueData[i] = modifieddepositTransaction(_to[i], _value[i], _gasLimit[i], _isCreation[i], _data[i]);
+        opaqueData[i] = modifieddepositTransaction(_to[i], _value[i], _gasLimit[i], _isCreation, _data[i]);
     }
 
     emit MultipleTransactionDeposited(msg.sender, _to, DEPOSIT_VERSION, opaqueData);
