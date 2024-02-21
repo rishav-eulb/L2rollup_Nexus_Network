@@ -170,6 +170,8 @@ abstract contract CrossDomainMessenger is
         OTHER_MESSENGER = _otherMessenger;
     }
 
+    /// Helper function to calculate `BaseGasLimit`, and `Data` that will be used during relay message for each transaction 
+
     function sendMessages(
         address _target,
         bytes calldata _message,
@@ -195,6 +197,8 @@ abstract contract CrossDomainMessenger is
             baseGas(_message, _minGasLimit)
         );
     }
+
+    /// main function, will call the helper function `sendMessages` n times and will call Portal's `MultipleDepositTransaction` function
 
     function sendMultipleMessage(
         address[] calldata _target,
