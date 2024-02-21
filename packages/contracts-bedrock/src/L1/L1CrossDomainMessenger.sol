@@ -56,7 +56,8 @@ contract L1CrossDomainMessenger is CrossDomainMessenger, ISemver {
         uint256[] _value,
         bytes[] memory _data
     ) internal {
-        PORTAL.MultipleDepositTransaction{ value: _value }(_to, _value, _gasLimit, new bool[](_to.length), _data);
+  
+        PORTAL.MultipleDepositTransaction{ value: _value }(_to, _value, _gasLimit, false, _data);
     }
 
 
