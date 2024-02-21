@@ -51,9 +51,9 @@ contract L1CrossDomainMessenger is CrossDomainMessenger, ISemver {
 
    
     function _sendMultipleMessages(
-        address[] memory _to,
-        uint64[] memory _gasLimit,
-        uint256[] memory _value,
+        address[] _to,
+        uint64[] _gasLimit,
+        uint256[] _value,
         bytes[] memory _data
     ) internal {
         PORTAL.MultipleDepositTransaction{ value: _value }(_to, _value, _gasLimit, new bool[](_to.length), _data);
