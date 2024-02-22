@@ -37,30 +37,10 @@ To achieve the task of enabling reward distribution on the Rollup network, the f
 
 1. **Modify OptimisticPortal.sol:**
     - Added a function to the bridge contract that allows users to specify a list of addresses and corresponding reward amounts to be distributed.
-    - Implemented the functionality to store the ETH rewards on the bridge and emit an event (`RewardDistributed`) upon successful distribution.
+    - Implemented the functionality to store the ETH rewards on the bridge and emit an event (`MultipleTransactionDeposited`) upon successful distribution.
 
 2. **Update Sequencer (sequencer.go):**
-    - Implemented a function (`IncludeRewardDistributedEventInBlock`) in the sequencer to catch the `RewardDistributed` event emitted by OptimisticPortal.sol.
-    - Modified the sequencer to include the `RewardDistributed` event in the block during block creation.
-    - Ensured that the inclusion of the event in the block increases the user balances on the Rollup network.
-
-## Functions Developed
-
-### OptimisticPortal.sol
-
-#### distributeRewards(address[] memory recipients, uint256[] memory amounts) external payable
-
-- Allows users to distribute rewards in the form of ETH to specified recipients on the Rollup network.
-- Users provide a list of recipient addresses and corresponding reward amounts.
-- The function stores the ETH rewards on the bridge and emits a `RewardDistributed` event upon successful distribution.
-
-### Sequencer (sequencer.go)
-
-#### IncludeRewardDistributedEventInBlock()
-
-- Catches the `RewardDistributed` event emitted by OptimisticPortal.sol.
-- Includes the event in the block during block creation on the Rollup network.
-- Increases the user balances on the Rollup network based on the rewards distributed.
+    - Implemented a function (`DistributeReward`) in the sequencer to catch the `MultipleTransactionDeposited` event emitted by OptimisticPortal.sol.
 
 ---
 
@@ -89,5 +69,5 @@ To achieve the task of enabling reward distribution on the Rollup network, the f
    - Experimented with a strategy that proved to be costlier on the mainnet. This involved following standard Deposit Flow approach of  transferring tokens from L1StandardBridge to L2StandardBridge and implementing a function (intiatingETHtoken()) that iterated n times on a custom function to bridge tokens.
    
 3. **Configuration for Custom Deposit Flow:**
-   - I wasn't able to determine whether I needed to implement a mechanism to capture events emitted on sequencer.go from the Optimism portal, implement function within L1StandardBridge.sol or OptimisticPortal.sol
+   - I wasn't able to determine whether I needed to implement a mechanism to capture events emitted on sequencer.go or from Deposits.go
 
